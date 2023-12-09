@@ -1,10 +1,11 @@
 import patients from "../data/patients";
-import { NoSsnPatient } from "./types";
+import { NoIdPatient, NoSsnPatient, Patient } from "./types";
+import { v1 as uuid } from 'uuid';
 
 
-const getAll = (): NoSsnPatient[]=>{
+const getAll = ():NoSsnPatient[]=>{
 
-    return patients.map(({id,name,occupation,dateOfBirth,gender})=>({
+    return patients.map(({dateOfBirth,gender,id,occupation, name})=>({
         id,
         name,
         dateOfBirth,
@@ -13,7 +14,22 @@ const getAll = (): NoSsnPatient[]=>{
     }));
 };
 
+const addPatient = (patient: NoIdPatient): Patient=>{
+
+
+    const newPatient = {
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+        id: uuid(),
+        ...patient
+      };
+    
+      patients.push(newPatient);
+      return newPatient;
+};
+
 
 export default {
-    getAll
+    getAll,
+    addPatient
 };
