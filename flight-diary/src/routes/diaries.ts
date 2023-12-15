@@ -5,10 +5,13 @@ import diaryServices from "../services/diaryService";
 const router = express.Router();
 
 router.get("/", (_req, res) => {
-  res.send(diaryServices.getNonSensitiveEntries());
+  // console.log(diaryServices.getEntries());
+  res.send(diaryServices.getEntries());
 });
 
 router.post("/", (req, res) => {
+
+  console.log(req.body);
 
   try {
     const newDiaryEntry = toNewDiaryEntry(req.body);
